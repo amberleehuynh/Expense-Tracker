@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Arimo&display=swap');
 
 :root {
   --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0.24);
@@ -9,13 +9,13 @@
 }
 
 body {
-  background-color: #f7ede2;
+  background-color: #F6F6F6;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0;
-  font-family: 'Arimo', sans-serif;
+  font-family: 'Alata', sans-serif;
 }
 
 .container {
@@ -30,17 +30,20 @@ h1 {
 
 h2 {
   font-size: 40px;
+  letter-spacing: 2px;
 }
 
 h3 {
   border-bottom: 1px solid #bbb;    /* Line */
   padding-bottom: 10px;
   margin: 40px 0 10px;
+  letter-spacing: 2px;
 }
 
 h4 {
-  margin: 0;
+  margin: 2px;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .inc-exp {
@@ -53,5 +56,25 @@ h4 {
 }
 
 .inc-exp > div {
-  
+  flex: 1;
+  text-align: center;
+}
+
+.inc-exp > div:first-of-type {    /* First div */
+  border-right: 1px solid #dedede;
+
+}
+
+.money {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+
+#money-plus {
+  color: #49886e;
+}
+
+#money-minus {
+  color: #CF1B1B;
 }
