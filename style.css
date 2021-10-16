@@ -31,7 +31,7 @@ h1 {
 h2 {
   font-size: 40px;
   letter-spacing: 2px;
-  margin: 17px;
+  margin: 30px 0 10px;
 }
 
 h3 {
@@ -53,16 +53,16 @@ h4 {
   box-shadow: var(--box-shadow);
   padding: 20px;
   margin: 15px 0;
-  display: flex;    /* Side by side */
-  justify-content: space-between;   /* One on each side */
-}
+  display: flex;                      /* Side by side */
+  justify-content: space-between;     /* One on each side */
+} 
 
 .inc-exp > div {
   flex: 1;
   text-align: center;
 }
 
-.inc-exp > div:first-of-type {    /* First div */
+.inc-exp > div:first-of-type {        /* First div */
   border-right: 1px solid #dedede;
 }
 
@@ -100,13 +100,73 @@ input[type='text'], input[type='number'] {
 }
 
 .btn {
+  cursor: pointer;
   background-color: #BFD8B8;
   box-shadow: var(--box-shadow);
   display: block;
   font-size: 16px;
-  margin: 15px 0 30px;
+  margin: 30px 0 30px;
   padding: 8px;
   width: 100%;
   letter-spacing: 1px;
   font-family: 'Alata', sans-serif;
+}
+
+.btn:focus, .delete:focus {
+  outline: 0;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.list li {
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px;
+  margin: 10px 0px;
+  letter-spacing: 1px;
+}
+
+.list li.plus {
+  border-right: 5px solid #CF1B1B;
+}
+
+.list li.minus {
+  border-right: 5px solid #478f71;
+}
+
+.delete {
+  border: 1px solid #333;
+  background-color: #EF4F4F;
+  font-size: 20px;
+  color: #fff;
+  line-height: 18px;
+  padding: 2px 6px;
+  position: absolute;                   /* Delete button on left side */
+  top: 50%;
+  left: 0;
+  transform: translate(-100%, -50%);    /* Fix positioning */
+  opacity: 0;                           /* Only show when hover over item */
+  transition: opacity 0.3s ease ;       /* Fades in/ out when hovering */
+}
+
+.list li:hover .delete{
+  opacity: 1;
+}
+
+#text {
+  font-family: 'Alata', sans-serif;
+  letter-spacing: 1px;
+}
+
+#amount {
+  font-family: 'Alata', sans-serif;
+  letter-spacing: 1px;
 }
