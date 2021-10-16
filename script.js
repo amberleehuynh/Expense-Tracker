@@ -6,7 +6,7 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
-const dummyTransactions = [   /* Array of objects */
+const dummyTransactions = [                           // Array of objects 
   { id: 1, text: 'Converse', amount: -38 },
   { id: 2, text: 'Mouse', amount: -11 },
   { id: 3, text: 'Gallon of water', amount: -1.50 },
@@ -20,7 +20,7 @@ function addTransactionDOM(transaction) {
   // Get sign - distinguish income from expense
   const sign = transcation.amount < 0 ? '-' : '+';    // Ternary operator where ? = then and : = else
 
-  const item = document.createElement('li');    // Create a list item
+  const item = document.createElement('li');          // Create a list item
   
   // Add class based on value
   item.classList.add(transaction.amount < 0 ? '-' : '+');
@@ -31,12 +31,12 @@ function addTransactionDOM(transaction) {
   `;
 
   // Add it to the DOM
-  list.appendChild(item);   // Function
+  list.appendChild(item);                            // Function
 }
 
 // Init app - run right away
 function init() {
-  list.innerHTML = '';    // Clear out the list
+  list.innerHTML = '';                               // Clear out the list
 
   transactions.forEach(addTransactionDOM);
 }
