@@ -27,6 +27,18 @@ function addTransactionDOM(transaction) {
 
   // Set innerHTML to a template string - use back ticks to set var, expressions 
   item.innerHTML = `
-    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
+    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> <button class="delete">x</button>
   `;
+
+  // Add it to the DOM
+  list.appendChild(item);   // Function
 }
+
+// Init app - run right away
+function init() {
+  list.innerHTML = '';    // Clear out the list
+
+  transactions.forEach(addTransactionDOM);
+}
+
+init();
