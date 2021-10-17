@@ -8,15 +8,51 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
-const dummyTransactions = 
-[                                                     // Array of objects 
-  { id: 1, text: 'Converse', amount: -38 },           // - = Expense, + = Income
-  { id: 2, text: 'Mouse', amount: -11 },
-  { id: 3, text: 'Gallon of water', amount: -1.50 },
-  { id: 4, text: 'Meet Fresh', amount: -8.39 }
-];
+// const dummyTransactions = 
+// [                                                     // Array of objects 
+//   { id: 1, text: 'Converse', amount: -38 },           // - = Expense, + = Income
+//   { id: 2, text: 'Mouse', amount: -11 },
+//   { id: 3, text: 'Gallon of water', amount: -1.50 },
+//   { id: 4, text: 'Meet Fresh', amount: -8.39 }
+// ];
 
-let transactions = dummyTransactions;
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));    // String -> parse into array thru JSON
+
+// If something is in there, use local storage transactions, else set to an empty array
+let transactions = localStorage.getItem('transaction') !== null ? localStorageTransactions : [];
+
+// ****************************************** ADD TRANSACTIONS ***********************************************
+function addTransaction(e) 
+{
+  e.preventDefault();   // Doesn't actually submit
+
+  if(text.value.trim() === '' || amount.value.trim() === '')    // Check if input is empty
+  {
+    alert('Please add a text and amount');
+  }
+  else
+  {
+    const transaction =   // Build an obj w/ id, text, and amount
+    {
+      id: genID(),
+      text: text.value,
+      amount: +amount.value           // amount.value has to be a number, add + to turn into a number
+    };
+    transactions.push(transaction);   // Push transaction (obj) to transactions (array) 
+    addTransactionDOM(transaction);   // Add transaction (obj) to the DOM
+    updateValues();
+    text.value = '';                  // Set text to nothing
+    amount.value = '';                // Set amount to nothing
+  }
+}
+
+// **********************************************************************************************************
+
+// Generate random ID
+function genID() 
+{
+  return Math.floor(Math.random() * 100000000);
+}
 
 // Add transactions to the DOM- display in History 
 function addTransactionDOM(transaction) 
@@ -30,20 +66,22 @@ function addTransactionDOM(transaction)
   item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');    
 
   // Set innerHTML to a template string - use backticks to set var, expressions 
-  item.innerHTML = 
+  item.innerHTML =          // removeTransaction = function that takes in the id
   `
-    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> <button class="delete">x</button>
+    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> <button class="delete" onclick="removeTransaction(${transaction.id})">x</button>
   `;
 
   // Add it to the DOM
   list.appendChild(item);                            // Function
 }
 
-// ********************************* Update the balance, income, and expense **************************************
+// ********************************* UPDATE THE BALANCE, INCOME, AND EXPENSE **************************************
 function updateValues() 
 {
-  const amounts = transactions.map(transactions => transactions.amount);      // Map() create an array of the amounts
-  const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);   // Total up the amounts/ accumulate that current item ; acc = accumulator 
+  const amounts = transactions.map(transactions => transactions.amount);    // Map() create an array of the amounts
+  const total = amounts
+                      .reduce((acc, item) => (acc += item), 0)    // Total up the amounts/ accumulate that current item ; acc = accumulator 
+                      .toFixed(2);   
 
   const income = amounts
                         .filter(item => item > 0)                       // Takes in a funct ; item > 0 is an income
@@ -60,6 +98,16 @@ function updateValues()
   money_plus.innerText = `$${income}`;
   money_minus.innerText = `$${expense}`; 
 }
+// **********************************************************************************************************
+
+// ************************************ REMOVE TRANSACTION BY ID (& line 68) ************************************
+function removeTransaction(id)
+{
+  transactions = transactions 
+                            .filter(transaction => transaction.id !== id);    // Eval the transaction id & see if it's not = to id passed in, thengo into array 
+  init();
+}
+// **********************************************************************************************************
 
 // Init app - run right away
 function init() 
@@ -71,3 +119,5 @@ function init()
 }
 
 init();
+
+form.addEventListener('submit', addTransaction)
