@@ -32,7 +32,7 @@ function addTransaction(e)
 
   if(text.value.trim() === '' || amount.value.trim() === '')    // Check if input is empty
   {
-    alert('Please add a text and amount');
+    alert('Please add a text and an amount');
   }
   else
   {
