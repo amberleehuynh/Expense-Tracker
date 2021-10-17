@@ -28,7 +28,7 @@ let transactions = localStorage.getItem('transactions') !== null ? localStorageT
 // ****************************************** ADD TRANSACTIONS ***********************************************
 function addTransaction(e) 
 {
-  e.preventDefault();   // Doesn't actually submit
+  e.preventDefault();                                           // Doesn't actually submit
 
   if(text.value.trim() === '' || amount.value.trim() === '')    // Check if input is empty
   {
@@ -36,7 +36,7 @@ function addTransaction(e)
   }
   else
   {
-    const transaction =   // Build an obj w/ id, text, and amount
+    const transaction =               // Build an obj w/ id, text, and amount
     {
       id: genID(),
       text: text.value,
@@ -73,11 +73,12 @@ function addTransactionDOM(transaction)
   // Set innerHTML to a template string - use backticks to set var, expressions 
   item.innerHTML =          // removeTransaction = function that takes in the id
   `
-    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> <button class="delete" onclick="removeTransaction(${transaction.id})">x</button>
+    ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span> 
+    <button class="delete" onclick="removeTransaction(${transaction.id})">x</button>
   `;
 
   // Add it to the DOM
-  list.appendChild(item);                            // Function
+  list.appendChild(item);                          
 }
 
 // ********************************* UPDATE THE BALANCE, INCOME, AND EXPENSE **************************************
@@ -99,21 +100,21 @@ function updateValues()
                         .toFixed(2);
 
   // Insert into the DOM
-  balance.innerText = `$${total}`;      // Set to a template string ; blue = syntax
+  balance.innerText = `$${total}`;                                      // Set to a template string ; blue = syntax
   money_plus.innerText = `$${income}`;
   money_minus.innerText = `$${expense}`; 
 }
-// **********************************************************************************************************
+// **************************************************************************************************************
 
 // ************************************ REMOVE TRANSACTION BY ID (& line 68) ************************************
 function removeTransaction(id)
 {
-  transactions = transactions 
-                            .filter(transaction => transaction.id !== id);    // Eval the transaction id & see if it's not = to id passed in, thengo into array 
+  // Eval the transaction id & see if it's !== to id passed in, then go into array
+  transactions = transactions.filter(transaction => transaction.id !== id);    
   updateLocalStorage();   // After refreshing page, data is still stored in local storage 
   init();
 }
-// **********************************************************************************************************
+// **************************************************************************************************************
 
 // ************************************** UPDATE LOCAL STORAGE TRANSACTIONS ***********************************
 function updateLocalStorage()
@@ -125,7 +126,7 @@ function updateLocalStorage()
 // Init app - run right away
 function init() 
 {
-  list.innerHTML = '';                               // Clear out the list
+  list.innerHTML = '';                           // Clear out the list
 
   transactions.forEach(addTransactionDOM);
   updateValues();
