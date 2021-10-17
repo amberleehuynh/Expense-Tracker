@@ -1,4 +1,4 @@
-// ************************** SHOW TRANSACTION ITEMS ******************************
+// *************************************** SHOW TRANSACTION ITEMS **************************************************
 
 const balance = document.getElementById('balance');           
 const money_plus = document.getElementById('money-plus');
@@ -39,18 +39,26 @@ function addTransactionDOM(transaction)
   list.appendChild(item);                            // Function
 }
 
-// Update the balance, income, and expense
+// ********************************* Update the balance, income, and expense **************************************
 function updateValues() 
 {
-  const amounts = transactions.map(transactions => transactions.amount);    // Map() create an array of the amounts
+  const amounts = transactions.map(transactions => transactions.amount);      // Map() create an array of the amounts
   const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);   // Total up the amounts/ accumulate that current item ; acc = accumulator 
 
   const income = amounts
-                        .filter(item => item > 0)   // Takes in a funct ; item > 0 is an income
-                        .reduce((acc, item) => (acc += item), 0)
+                        .filter(item => item > 0)                       // Takes in a funct ; item > 0 is an income
+                        .reduce((acc, item) => (acc += item), 0)        // Add up the income
                         .toFixed(2);
 
-  const expense = 
+  const expense = amounts
+                        .filter(item => item < 0)                       // Item < 0 is an expense
+                        .reduce((acc, item) => (acc += item), 0) * -1
+                        .toFixed(2);
+
+  // Insert into the DOM
+  balance.innerText = `$${total}`;      // Set to a template string ; blue = syntax
+  money_plus.innerText = `$${income}`;
+  money_minus.innerText = `$${expense}`; 
 }
 
 // Init app - run right away

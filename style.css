@@ -135,11 +135,11 @@ input[type='text'], input[type='number'] {
 }
 
 .list li.plus {
-  border-right: 5px solid #CF1B1B;
+  border-right: 5px solid #478f71;
 }
 
 .list li.minus {
-  border-right: 5px solid #478f71;
+  border-right: 5px solid #CF1B1B;
 }
 
 .delete {
