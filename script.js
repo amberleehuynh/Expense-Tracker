@@ -93,9 +93,9 @@ function updateValues()
                         .reduce((acc, item) => (acc += item), 0)        // Add up the income
                         .toFixed(2);
 
-  const expense = amounts
+  const expense = (amounts
                         .filter(item => item < 0)                       // Item < 0 is an expense
-                        .reduce((acc, item) => (acc += item), 0) * -1
+                        .reduce((acc, item) => (acc += item), 0) * -1)
                         .toFixed(2);
 
   // Insert into the DOM
