@@ -16,10 +16,14 @@ const amount = document.getElementById('amount');
 //   { id: 4, text: 'Meet Fresh', amount: -8.39 }
 // ];
 
+// ****************************************** LOCAL STORAGE ***********************************************
+
 const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));    // String -> parse into array thru JSON
 
 // If something is in there, use local storage transactions, else set to an empty array
-let transactions = localStorage.getItem('transaction') !== null ? localStorageTransactions : [];
+let transactions = localStorage.getItem('transactions') !== null ? localStorageTransactions : [];
+
+// ********************************************************************************************************
 
 // ****************************************** ADD TRANSACTIONS ***********************************************
 function addTransaction(e) 
@@ -41,6 +45,7 @@ function addTransaction(e)
     transactions.push(transaction);   // Push transaction (obj) to transactions (array) 
     addTransactionDOM(transaction);   // Add transaction (obj) to the DOM
     updateValues();
+    updateLocalStorage();
     text.value = '';                  // Set text to nothing
     amount.value = '';                // Set amount to nothing
   }
@@ -105,7 +110,15 @@ function removeTransaction(id)
 {
   transactions = transactions 
                             .filter(transaction => transaction.id !== id);    // Eval the transaction id & see if it's not = to id passed in, thengo into array 
+  updateLocalStorage();   // After refreshing page, data is still stored in local storage 
   init();
+}
+// **********************************************************************************************************
+
+// ************************************** UPDATE LOCAL STORAGE TRANSACTIONS ***********************************
+function updateLocalStorage()
+{
+  localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 // **********************************************************************************************************
 
