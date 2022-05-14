@@ -2,7 +2,7 @@
 Expense Tracker helps users keep track of their income, expenses, and total balance! 
 They can add and delete transactions which will also be displayed in the History section. 
 
-# Software build
+## Software build
 Open Terminal console and complete the following steps:
 
 ```
