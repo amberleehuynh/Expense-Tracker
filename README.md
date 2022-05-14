@@ -9,4 +9,6 @@ Open Terminal console and complete the following steps:
 git clone https://github.com/USERNAME/Expense-Tracker.git
 ```
 
-Click on the "Run" button to run the code
+Click on the "Run" button to run the code.
+Open the index.html file on your preferred browser.
+Input your desired transactions!
